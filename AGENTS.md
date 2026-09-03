@@ -166,6 +166,19 @@ Use, as applicable:
 
 Do not declare gameplay behavior complete solely because it compiles.
 
+### LocalFFXIServer Tests
+
+Custom automated tests belong under:
+
+`scripts/tests/localffxi/`
+
+This is an intentional exception to the normal rule of avoiding changes under
+`scripts/`, because LandSandBoat requires xi_test suites to live under
+`scripts/tests`.
+
+Do not place LocalFFXIServer gameplay implementation code there. Actual custom
+behavior remains under `modules/custom/`.
+
 ## Build Environment
 
 The supported local build helper is:

@@ -1,0 +1,5 @@
+describe('LocalFFXIServer sanity', function()
+    it('can execute custom automated tests', function()
+        assert(true)
+    end)
+end)
