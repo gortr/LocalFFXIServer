@@ -1,0 +1,11 @@
+-- Local LandSandBoat LAN zone address.
+--
+-- Copy this file to:
+--   lan_zone_ip.sql
+--
+-- Then replace <LSB_VM_IP> with the LAN address of the LSB server.
+--
+-- Do not commit the live lan_zone_ip.sql file.
+
+UPDATE zone_settings
+SET zoneip = '<LSB_VM_IP>';
