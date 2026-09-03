@@ -151,6 +151,14 @@ Prefer current `Quest`, `Mission`, and `HiddenQuest` patterns over legacy giant 
 
 Do not invent event IDs, NPC IDs, quest IDs, dialogue, packet behavior, or retail progression requirements.
 
+## Gameplay Philosophy
+
+All gameplay, balance, progression, Trust, economy, QoL, and custom-content decisions should follow:
+
+`documentation/local_server/GAMEPLAY_PHILOSOPHY.md`
+
+Before proposing or implementing balance changes, read that document and make sure the change is consistent with its design principles.
+
 ## Testing
 
 Every meaningful change should have an explicit test plan.
