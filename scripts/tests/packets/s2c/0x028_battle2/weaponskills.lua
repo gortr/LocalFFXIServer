@@ -89,10 +89,16 @@ local packets =
             player:addItem(xi.item.TERPSICHORE_99)
             player:equipItem(xi.item.TERPSICHORE_99, nil, xi.slot.MAIN)
             player:setTP(3000)
+
+            mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+            xi.test.world:skipTime(10)
+
             player.actions:engage(mob)
             player.actions:move(mob:getXPos() - 15, mob:getYPos(), mob:getZPos())
             player.actions:useWeaponskill(mob, xi.weaponskill.PYRRHIC_KLEOS)
             xi.test.world:skipTime(2)
+
+            mob:setMobMod(xi.mobMod.NO_MOVE, 0)
         end,
 
         expected =
@@ -163,6 +169,7 @@ local packets =
     {
         test = function(player, mob)
             stub('xi.combat.physicalHitRate.getPhysicalHitRate', 1)
+            player:addStatusEffect(xi.effect.DYNAMIS, { duration = 3600, origin = player, tick = 3, icon = 0 })
             player:gotoZone(xi.zone.DYNAMIS_SAN_DORIA)
             player:changeJob(xi.job.DNC)
             player:setLevel(99)

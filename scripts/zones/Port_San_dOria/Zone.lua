@@ -27,7 +27,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conquest.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conquest.onNonRegionConquestUpdate(zone, updatetype, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -38,7 +38,7 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
 end
 
 zoneObject.onTransportEvent = function(player, prevZoneId, transportName)
-    if not player:hasKeyItem(xi.ki.AIRSHIP_PASS) then
+    if not player:hasKeyItem(xi.keyItem.AIRSHIP_PASS) then
         player:startEvent(701)
         return
     end

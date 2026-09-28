@@ -139,6 +139,10 @@ xi.settings.main =
     WEAPON_SKILL_POWER  = 1.000, -- Multiplies damage dealt by Weapon Skills.
     DELAY_REDUCTION_CAP = 0.80,  -- Set the cap for melee swing haste effect. (0.80 = 80% retail delay reduction max, 0.93 = 93% ToAU delay reduction max)
 
+    -- When true, use 8 + Blue magic skill + STR*ONE_HAND_MAIN_HAND_STR_ATTACK_MULTIPLIER for base attack (before blue magic merits) instead of current retail's "fetch main hand weapon attack" style
+    -- see xi.spells.blue.getBlueMagicBaseAttack
+    BLUE_SKILL_IS_BLUE_ATTACK = false,
+
     -- STR:ATT/RATT ratios. For players only. Mobs are hardcoded to 0.5
     TWO_HANDED_STR_ATTACK_MULTIPLIER         = 1.0,  -- 1.0: 1 STR = 1 Attack. This has been 0.5 and 0.75 in previous eras
     HAND_TO_HAND_STR_ATTACK_MULTIPLIER       = 1.0,  -- 1.0: 1 STR = 1 Attack. This has been 0.5 and 0.625 in previous eras.
@@ -194,17 +198,14 @@ xi.settings.main =
     -- SE implemented coffer/chest illusion time in order to prevent coffer farming. No-one in the same area can open a chest or coffer for loot (gil, gems & items)
     -- till a random time between MIN_ILLSION_TIME and MAX_ILLUSION_TIME. During this time players can loot keyitem and item related to quests (AF, maps... etc.)
     COFFER_MAX_ILLUSION_TIME = 3600,  -- 1 hour
-    COFFER_MIN_ILLUSION_TIME = 1800,  -- 30 minutes
+    COFFER_MIN_ILLUSION_TIME =  900,  -- 15 minutes
     CHEST_MAX_ILLUSION_TIME  = 3600,  -- 1 hour
-    CHEST_MIN_ILLUSION_TIME  = 1800,  -- 30 minutes
+    CHEST_MIN_ILLUSION_TIME  =  900,  -- 15 minutes
 
     -- Multiplier to NM lottery spawn chance. (Default 1.0) eg. 0 = disable lottery spawns. -1 for always 100% chance.
     NM_LOTTERY_CHANCE = 1.0,
     -- Multiplier to NM lottery cooldown time (Default 1.0) eg. 2.0 = twice as long. 0 = no cooldowns.
     NM_LOTTERY_COOLDOWN = 1.0,
-
-    -- CONQUEST SETTINGS
-    CONQUEST_INFLUENCE_CAP = 250000, -- Combined influence pool per region shared across the 4 nations. Ceiling is 20 million.
 
     -- GARRISON SETTINGS
     ENABLE_GARRISON        = true,  -- If true, enables garrison functionality
@@ -245,7 +246,6 @@ xi.settings.main =
     USE_OLD_CURE_FORMULA            = false, -- true/false. if true, uses older cure formula (3*MND + VIT + 3*(healing skill/5)) // cure 6 will use the newer formula
     USE_OLD_MAGIC_DAMAGE            = false, -- true/false. if true, uses older magic damage formulas
     USE_OLD_COUNTERSTANCE           = false, -- true/false. if true, Counterstance DEF = 1 + VIT/2 (+ Minne); gear/Protect ignored
-    USE_OLD_STAT_FORMULAS           = false, -- true/false. if true, uses the older player growth: base stat parts rounded down separately, and the pre-April-2014 racial HP/MP values (job values were unchanged)
 
     -- CELEBRATIONS
     EXPLORER_MOOGLE_LV              = 10, -- Enables Explorer Moogle teleports and sets required level. Zero to disable.
@@ -300,15 +300,10 @@ xi.settings.main =
     ENABLE_VIGIL_DROPS   = true,  -- Enable Vigil Weapon drops from NMs.
     ACTIVATE_LAMP_TIME   = 6000,  -- Time in miliseconds for lamps to stay lit. TODO: Get retail confirmation.
 
-    -- CHOCOBO RAISING (HEAVILY-IN-DEVELOPMENT, USE AT YOUR OWN RISK)
-    -- GM command: `!chocoboraising`
-    ENABLE_CHOCOBO_RAISING              = false, -- true/false. Enable Chocobo Raising features.
-    DEBUG_CHOCOBO_RAISING               = false, -- true/false. Enable verbose debug logging for Chocobo Raising (visible by players).
-    CHOCOBO_RAISING_STAT_POS_MULTIPLIER = 1.0,   -- float. Multiplier for positive stat changes. Default 1.0.
-    CHOCOBO_RAISING_STAT_NEG_MULTIPLIER = 1.0,   -- float. Multiplier for negative stat changes. Default 1.0.
-    CHOCOBO_RAISING_GIL_MULTIPLIER      = 1.0,   -- float. Multiplier for gil recieved through chocobo actions (care plans, etc.). Default 1.0.
-    CHOCOBO_RAISING_DISABLE_RETIREMENT  = false, -- true/false.
-    CHOCOBO_RAISING_STAT_GROWTH_CAP     = 512,   -- int.
+    -- CHOCOBO RAISING
+    -- GMs open the developer debug menu on the chocobo next to each VCS trainer.
+    ENABLE_CHOCOBO_RAISING = true,  -- true/false. Enable Chocobo Raising features.
+    DEBUG_CHOCOBO_RAISING  = false, -- true/false. Enable verbose debug logging for Chocobo Raising (visible by players).
 
     -- SYNERGY (HEAVILY-IN-DEVELOPMENT, USE AT YOUR OWN RISK)
     ENABLE_SYNERGY = false, -- true/false. Enable Synergy features.
@@ -322,8 +317,6 @@ xi.settings.main =
     NUMBER_OF_DM_EARRINGS        = 1,     -- Number of earrings players can simultaneously own from Divine Might before scripts start blocking them (Default: 1)
     HOMEPOINT_TELEPORT           = 1,     -- Enables the homepoint teleport system
     DIG_FATIGUE                  = 100,   -- Allowed succesful digs per day. Set to 0 to disable Dig Fatigue
-    DIG_GRANT_BURROW             = 0,     -- Set to 1 to grant burrow ability
-    DIG_GRANT_BORE               = 0,     -- Set to 1 to grant bore ability
     ENM_COOLDOWN                 = 120,   -- Number of hours before a player can obtain same KI for ENMs (default: 5 days)
     FORCE_SPAWN_QM_RESET_TIME    = 300,   -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
     EQUIP_FROM_OTHER_CONTAINERS  = false, -- true/false. Allows equipping items from Mog Satchel, Sack, and Case. Only possible with the use of client addons.

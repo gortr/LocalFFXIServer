@@ -26,7 +26,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setBaseSpeed(27)
     GetNPCByID(ID.npc.PORTAL_OFFSET + 5):setAnimation(xi.animation.CLOSE_DOOR)
     mob:setLocalVar('defaultATT', mob:getMod(xi.mod.ATT))
 
@@ -67,7 +66,9 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:showText(mob, ID.text.SKY_GOD_OFFSET + 6)
+    if player then
+        player:showText(mob, ID.text.SKY_GOD_OFFSET + 6)
+    end
 end
 
 entity.onMobDespawn = function(mob)

@@ -430,7 +430,7 @@ auto CAIContainer::CanChangeState() const -> bool
 
 auto CAIContainer::CanFollowPath() const -> bool
 {
-    return PathFind && (!GetCurrentState() || GetCurrentState()->CanChangeState());
+    return PathFind && (!GetCurrentState() || (GetCurrentState()->CanChangeState() && GetCurrentState()->CanFollowPath()));
 }
 
 void CAIContainer::SetController(std::unique_ptr<CController> controller)
@@ -477,13 +477,12 @@ void CAIContainer::Reset()
 
 auto CAIContainer::Tick(const timer::time_point tick) -> Task<void>
 {
-    TracyZoneScoped;
+    TracyZoneScopedN("CAIContainer::Tick");
 
     m_PrevTick = m_Tick;
     m_Tick     = tick;
 
-    // TODO: timestamp in the event?
-    EventHandler.triggerListener("TICK", PEntity);
+    EventHandler.triggerListener("TICK", PEntity, std::chrono::duration_cast<std::chrono::milliseconds>(m_Tick - m_PrevTick).count());
 
     co_await PEntity->Tick(tick);
 
@@ -545,7 +544,7 @@ auto CAIContainer::Tick(const timer::time_point tick) -> Task<void>
     if (auto* battle = dynamic_cast<CBattleEntity*>(PEntity);
         battle && battle->isAlive() && !IsCurrentState<CInactiveState>() &&
         !IsCurrentState<CMagicState>() && !IsCurrentState<CMobSkillState>() &&
-        battle->StatusEffectContainer->HasPreventActionEffect())
+        battle->StatusEffectContainer->HasPreventActionEffect(true))
     {
         Inactive(0ms, false);
     }

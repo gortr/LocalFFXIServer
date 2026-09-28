@@ -181,6 +181,7 @@ struct Pet_t
     float HPscale; // HP boost percentage
     float MPscale; // MP boost percentage
 
+    xi::SkillType  cmbSkill;
     uint16         cmbDelay;
     xi::DamageType m_dmgType;
     uint8          speed;
@@ -253,6 +254,7 @@ struct Pet_t
     , m_Element(0)
     , HPscale(1.f)
     , MPscale(1.f)
+    , cmbSkill(xi::SkillType::None)
     , cmbDelay(0)
     , m_dmgType(xi::DamageType::None)
     , speed(0)
@@ -315,7 +317,7 @@ void LoadPetList();
 void FreePetList();
 
 void  SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone);
-void  SpawnMobPet(CBattleEntity* PMaster, uint32 PetID);
+void  SpawnMobPet(CBattleEntity* PMaster, uint32 PetID, bool preserveName = false);
 void  DetachPet(CBattleEntity* PMaster);
 void  DespawnPet(CBattleEntity* PMaster);
 void  AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget);

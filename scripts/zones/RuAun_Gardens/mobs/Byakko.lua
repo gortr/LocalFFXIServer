@@ -24,7 +24,6 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setBaseSpeed(68)
     mob:setMod(xi.mod.ATT, 391) -- 440 total attack.
     mob:setMod(xi.mod.DEF, 345) -- 415 total defense.
     mob:setMod(xi.mod.SILENCE_RES_RANK, 10)
@@ -61,7 +60,9 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:showText(mob, ID.text.SKY_GOD_OFFSET + 12)
+    if player then
+        player:showText(mob, ID.text.SKY_GOD_OFFSET + 12)
+    end
 end
 
 entity.onMobDespawn = function(mob)
